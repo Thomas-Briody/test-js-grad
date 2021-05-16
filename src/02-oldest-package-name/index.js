@@ -46,6 +46,6 @@ module.exports = async function oldestPackageName() {
     const packageBDateTimestamp = new Date(packageB.package.date).getTime()
     return packageADateTimestamp - packageBDateTimestamp 
   })
-  console.log('SORTED', sortedPackages)
+  // console.log('SORTED', sortedPackages)
   return sortedPackages[0].package.name
 };
