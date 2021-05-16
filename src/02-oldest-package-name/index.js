@@ -31,21 +31,18 @@ The results should have this structure:
 const axios = require('axios')
 
 module.exports = async function oldestPackageName() {
-  // TODO
 
   const res = await axios.post('http://ambush-api.inyourarea.co.uk/ambush/intercept', {
     "url": "https://api.npms.io/v2/search/suggestions?q=react",
     "method": "GET",
     "return_payload": true
   })
-  // console.log(res.data.content)
-  const allPackages = res.data.content
-  const sortedPackages = allPackages.sort((packageA, packageB) => {
-    // console.log('PACKAGE A DATE', packageA.package.date)
-    const packageADateTimestamp = new Date(packageA.package.date).getTime()
-    const packageBDateTimestamp = new Date(packageB.package.date).getTime()
-    return packageADateTimestamp - packageBDateTimestamp 
+  const sortedPackages = res.data.content.sort((packageA, packageB) => {
+    const packageADTstamp = new Date(packageA.package.date).getTime()
+    const packageBDTstamp = new Date(packageB.package.date).getTime()
+
+    return packageADTstamp - packageBDTstamp 
   })
-  // console.log('SORTED', sortedPackages)
+  
   return sortedPackages[0].package.name
-};
+}
